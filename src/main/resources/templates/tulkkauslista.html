@@ -1,0 +1,104 @@
+<! DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Tulkkaukset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<p></p>
+	
+	<div sec:authorize="hasAuthority('ADMIN')" class="container-fluid" >
+	<h2 class="bg-info text-white"><b class="text-light">Tervetuloa tulkkaussivulle,
+			[[${#httpServletRequest.remoteUser}]] !</b></h2>
+		
+		<div style="float:right">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Kirjaudu ulos"
+					class="btn btn-sm btn-danger" />
+			</form>
+		</div>
+
+		<table class="table table-dark table-striped">
+		
+			<h4 class="text-secondary">Varatut tulkkaukset</h4>
+
+			<tr>
+				<th class="text-info">Tilaaja</th>
+				<th class="text-info">Aihe</th>
+				<th class="text-info">Tulkkauspaikka</th>
+				<th class="text-info">Tulkkauspaikan osoite</th>
+				<th class="text-info">Tulkkauskieli</th>
+				<th class="text-info">Tulkkauksen tyyppi</th>
+				<th class="text-info">Tulkkausksen päivä ja aika</th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				
+				
+			</tr>
+			<tr th:each="tulkkaus : ${tulkkaukset}">
+				<td th:text="${tulkkaus.tilaaja}"></td>
+				<td th:text="${tulkkaus.aihe}"></td>
+				<td th:text="${tulkkaus.tulkkauspaikka}"></td>
+				<td th:text="${tulkkaus.osoite}"></td>
+				<td th:text="${tulkkaus.tulkkauskieli.tulkkauskielennimi}"></td>
+				<td th:text="${tulkkaus.tulkkaustyyppi.tulkkaustyypinnimi}"></td>
+				<td th:text="${tulkkaus.pvm}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a
+					th:href="@{/delete/{id}(id=${tulkkaus.id})}" class="btn btn-danger">Poista</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a
+					th:href="@{/edit/{id}(id=${tulkkaus.id})}" class="btn btn-warning">Muokkaa</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a
+					th:href="@{/cancel/{id}(id=${tulkkaus.id})}" class="btn btn-danger">Peruuta</a></td>
+			</tr>
+		</table>
+		<a sec:authorize="hasAuthority('ADMIN')" href="/add"
+			class="btn bg-info text-white">Lisää uusi tulkkaus</a>
+	</div>
+	
+	<div sec:authorize="hasAuthority('TULKKI')" class="container" >
+	<h2 class="bg-success text-white">Tervetuloa tulkkaussivulle, <b class="text-warning">
+			[[${#httpServletRequest.remoteUser}]]</b> !</h2>
+		
+		<div style="float:right">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Kirjaudu ulos"
+					class="btn btn-sm btn-danger" />
+			</form>
+		</div>
+	<h4 class="text-secondary">Varatut tulkkaukset</h4>
+		<table class="table table-dark table-striped">
+		
+			
+
+			<tr  class="text-success">
+				<th >Tilaaja</th>
+				<th>Aihe</th>
+				<th>Tulkkauspaikka</th>
+				<th>Tulkkauspaikan osoite</th>
+				<th>Tulkkauskieli</th>
+				<th>Tulkkauksen tyyppi</th>
+				<th>Tulkkausksen päivä ja aika</th>
+								
+			</tr>
+			<tr th:each="tulkkaus : ${tulkkaukset}" >
+				<td th:text="${tulkkaus.tilaaja}" class="text-warning"></td>
+				<td th:text="${tulkkaus.aihe}" class="text-warning"></td>
+				<td th:text="${tulkkaus.tulkkauspaikka}" class="text-warning"></td>
+				<td th:text="${tulkkaus.osoite}" class="text-warning"></td>
+				<td th:text="${tulkkaus.tulkkauskieli.tulkkauskielennimi}" class="text-warning"></td>
+				<td th:text="${tulkkaus.tulkkaustyyppi.tulkkaustyypinnimi}" class="text-warning"></td>
+				<td th:text="${tulkkaus.pvm}" class="text-warning"></td>
+				
+			</tr>
+		</table>
+	
+	</div>
+	
+</body>
+
+
+</html>

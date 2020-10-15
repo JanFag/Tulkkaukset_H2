@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org" lang="fi">
+<head>
+<title>Muokkaa tulkkaus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<p></p>
+<div class="container">
+  <h3 class="bg-primary text-white">Muokkaa tulkkaus</h3>
+  <form action="#" th:object="${tulkkaus}" th:action="@{/editvalidation}" method="post">
+  <input type="hidden" id="id" th:field="*{id}" />
+    <div class="form-group">
+      <label for="title">Tilaaja:</label>
+      <input type="text" class="form-control" id="tilaaja" placeholder="Syötä tilaaja" th:field="*{tilaaja}">
+      <p class="text-danger" th:if="${#fields.hasErrors('tilaaja')}" th:errors="*{tilaaja}"></p>
+    </div>
+    <div class="form-group">
+      <label for="author">Tulkkauksen aihe:</label>
+      <input type="text" class="form-control" id="aihe" placeholder="Anna lisätietoja tulkkauksen aiheesta" th:field="*{aihe}">
+      <p class="text-danger" th:if="${#fields.hasErrors('aihe')}" th:errors="*{aihe}"></p>
+    </div>
+    <div class="form-group">
+      <label for="year">Tulkkauspaikka:</label>
+      <input type="text" class="form-control" id="tulkkauspaikka" placeholder="Tarkenna tarvittaessa tulkkauspaikka" th:field="*{tulkkauspaikka}">  
+    </div>
+    <div class="form-group">
+      <label for="osoite">Tulkkauspaikan osoite:</label>
+      <input type="text" class="form-control" id="osoite" placeholder="Syötä tulkkauspaikan osoite" th:field="*{osoite}">
+      <p class="text-danger" th:if="${#fields.hasErrors('osoite')}" th:errors="*{osoite}"></p>
+    </div>
+  
+    <div class="form-group col-md-4">
+      <label for="inputTulkkauskieli">Valitse tulkkauskieli:</label>
+      <select id="inputTulkkauskieli" th:field="*{tulkkauskieli}" class="form-control">
+        <option th:each="tulkkauskieli: ${tulkkauskielet}" th:value="${tulkkauskieli.id}" th:text="${tulkkauskieli.tulkkauskielennimi}"></option>
+      </select>
+    </div>
+	<div class="form-group col-md-4">
+      <label for="inputTulkkaustyyppi">Valitse tulkkaustyyppi:</label>
+      <select id="inputTulkkaustyyppi" th:field="*{tulkkaustyyppi}" class="form-control">
+        <option th:each="tulkkaustyyppi: ${tulkkaustyypit}" th:value="${tulkkaustyyppi.id}" th:text="${tulkkaustyyppi.tulkkaustyypinnimi}"></option>
+        
+      </select>
+    </div>
+        <div class="form-group">
+      <label for="pvm">Tulkkauksen päivämäärä ja kellonaika:</label>
+      <input type="text" class="form-control" id="osoite" placeholder="Syötä tulkkauksen päivämäärä ja kellonaika" th:field="*{pvm}">
+      <p class="text-danger" th:if="${#fields.hasErrors('pvm')}" th:errors="*{pvm}"></p>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+ 
+</div>
+
+</body>
+</html>
