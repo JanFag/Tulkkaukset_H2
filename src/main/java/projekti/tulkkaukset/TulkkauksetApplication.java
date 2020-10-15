@@ -29,7 +29,7 @@ public class TulkkauksetApplication {
 	@Bean
 	public CommandLineRunner demo(TulkkausRepository repository, TulkkaustyyppiRepository trepository, UserRepository urepository, TulkkauskieliRepository krepository ) {
 	return (args) -> {
-		log.info("save a couple of books");
+		log.info("save tulkkaustyypit, tulkkauskielet and tulkkaukset");
 		trepository.save(new Tulkkaustyyppi("Paikan päällä"));
 		trepository.save(new Tulkkaustyyppi("Videotulkkaus"));
 		trepository.save(new Tulkkaustyyppi("Puhelintulkkaus"));
