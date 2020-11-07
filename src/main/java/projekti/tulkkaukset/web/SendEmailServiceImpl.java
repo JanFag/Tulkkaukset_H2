@@ -20,8 +20,8 @@ public class SendEmailServiceImpl {
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 
-		mailSender.setUsername("noreply.qwerty.pro@gmail.com");
-		mailSender.setPassword("skyqkvnkvjbpfvdd");
+		mailSender.setUsername("noreply.xxxx@gmail.com");
+		mailSender.setPassword("xxxxx");
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
@@ -37,7 +37,7 @@ public class SendEmailServiceImpl {
 	         	    
 	    try {
 	    	MimeMessageHelper helper = new MimeMessageHelper(message, true);
-	    	helper.setFrom("janica.fagerblom@gmail.com");
+	    	helper.setFrom("xxxxxx@gmail.com");
 		    helper.setTo(to);
 		    helper.setSubject(subject);
 			helper.setText(text);
